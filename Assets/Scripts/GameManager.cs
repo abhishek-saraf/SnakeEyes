@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using TMPro;
+
 namespace com.abhishek.saraf.SnakeEyes
 {
     /**
@@ -16,6 +18,8 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private GameObject _grid;
 
+        [SerializeField] private TextMeshProUGUI _scoreText;
+
         #endregion
 
         #region Public Attributes
@@ -23,6 +27,8 @@ namespace com.abhishek.saraf.SnakeEyes
         public static GameManager instance;
 
         public int cameraHeight, cameraWidth;
+
+        public int score = 0;
 
         #endregion
 
@@ -48,14 +54,22 @@ namespace com.abhishek.saraf.SnakeEyes
         // Update is called once per frame
         void Update()
         {
-            
+            _scoreText.text = "Score: " + score;
         }
 
         #endregion
 
         #region Public Methods
 
+        public void AddScore()
+        {
+            score += 1;
+        }
 
+        public void GameOver()
+        {
+            Time.timeScale = 0;
+        }
 
         #endregion
 

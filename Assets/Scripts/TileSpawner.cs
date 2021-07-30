@@ -13,19 +13,19 @@ namespace com.abhishek.saraf.SnakeEyes
     {
         #region Private Attributes
 
-        private int _totalTiles;
-
-        private Vector3 _tileScale;
-
         private int cols, rows;
 
         [SerializeField] private float _tileSize = 0.237f;
+
+        [SerializeField] private Material _initialMat;
 
         #endregion
 
         #region Public Attributes
 
         public List<GameObject> tiles;
+
+        public static TileSpawner instance;
 
         #endregion
 
@@ -34,7 +34,8 @@ namespace com.abhishek.saraf.SnakeEyes
         // Awake is called when the script instance is being loaded.
         private void Awake()
         {
-            _tileScale = new Vector3(0.237f, 0.001f, 0.237f);
+            instance = this;
+
             tiles = new List<GameObject>();
         }
 
@@ -43,8 +44,9 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             rows = GameManager.instance.cameraHeight;
             cols = GameManager.instance.cameraWidth;
-            _totalTiles = rows * cols;
             InstantiateTiles();
+
+            Pickups.instance.SpawnPizzas();
         }
 
         // Update is called once per frame
@@ -56,34 +58,66 @@ namespace com.abhishek.saraf.SnakeEyes
         private void InstantiateTiles()
         {
             GameObject referenceTile = Instantiate(Resources.Load<GameObject>(Path.Combine("Prefabs", "Tile")));
+            referenceTile.GetComponent<MeshRenderer>().material = _initialMat;
+
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    Debug.Log("Hey!");
-                    // GameObject tile = Instantiate(Resources.Load<GameObject>(Path.Combine("Prefabs", "Tile")), new Vector3(), Quaternion.identity, transform);
-
                     GameObject tile = Instantiate(referenceTile, transform);
 
-                    float posX = col * _tileSize;
-                    float posZ = row * -_tileSize;
+                    float posX = row * _tileSize;
+                    float posZ = col * -_tileSize;
 
                     tile.transform.position = new Vector3(posX, 0.0f, posZ);
+
+                    tiles.Add(tile);
                 }
             }
 
             Destroy(referenceTile);
 
-            // float gridWidth = cols * _tileSize;
-            // float gridHeight = rows * _tileSize;
-            // transform.position = new Vector3(-gridWidth / 2 + _tileSize / 2, gridHeight / 2 - _tileSize /2);
+            float gridWidth = cols * _tileSize;
+            float gridHeight = rows * _tileSize;
+            transform.position = new Vector3(-gridHeight / 2 + _tileSize / 2, 0.0f, gridWidth / 2 - _tileSize / 2);
         }
 
         #endregion
 
         #region Public Methods
 
+        public GameObject GetPizzaSpawnLocation()
+        {
+            bool allGreenFlag = true;
 
+            foreach (GameObject tile in tiles)
+            {
+                if (tile.GetComponent<MeshRenderer>().material.color.Equals(_initialMat.color))
+                {
+                    allGreenFlag = false;
+                    break;
+                }
+            }
+
+            if (allGreenFlag)
+            {
+                GameManager.instance.GameOver();
+            }
+
+            int randomTileIndex = Random.Range(0, tiles.Count);
+
+            GameObject randomTile = tiles[randomTileIndex];
+
+            if (randomTile.GetComponent<MeshRenderer>().material.color.Equals(_initialMat.color))
+            {
+                return tiles[randomTileIndex];
+            }
+            else
+            {
+                Debug.Log(randomTile.transform.position);
+                return null;
+            }
+        }
 
         #endregion
 
