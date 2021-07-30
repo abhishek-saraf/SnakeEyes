@@ -1,0 +1,50 @@
+Introduction - SnakeEyes:
+-------------------------
+The game is based on the popular Nokia Snake Game.
+
+
+
+Requirements:
+-------------
+
+1. The snake should move at a constant speed within the walls.
+2. The grid size should be customizable = N x M.
+3. Snake Objectives:
+	a. Every tile the snake touches turns green.
+	b. Food items (slices of pizza, in this case) are strewn randomly on any non-green tile; i.e. tile not yet touched by the snake.
+	c. The slices have to be within the walls of the game.
+	d. Each slice stays on screen for ‘n’ number of seconds and then disappears.
+	e. If the slice is collected by the snake before time runs out, the score increases by +1.
+	f. Whenever the snake hits the border, it should bounce off the edge. Imagine that the border is a mirror, and the snake bounces off as if reflecting off the mirror. So, it will be a mirror-reflection bounce effect.
+4. The game ends when all tiles turn green.
+5. Animation requirements:
+	The snake needs to have 3 animations - All these animations need to be implemented when the snake is being turned:
+		i. Idle Loop [Slither - the generic snake movement].
+		ii. Turn left.
+		iii. Turn right.
+6. Customizations:
+	The following aspect(s) need to be editable in Unity Editor:
+		i. The grid of the game.
+		ii. The speed of the snake.
+		iii. The number of seconds the collectible will be on screen.
+7. UI - The UI should be scalable across devices. Game will be tested on multiple <<<landscape>>> resolutions.
+	a. Start.
+	b. Pause.
+	c. Resume.
+	d. Scoreboard.
+8. Snake Controller:
+	a. The control for moving the snake should behave exactly like a car’s steering wheel.
+	b. It should not have a clamp, like the one in the sample video.
+9. Code Structuring:
+	a. The code should be properly structured.
+	b. Please use proper design patterns and code communications.
+	c. Please don't write hack or prototype-level code.
+10. Miscellaneous:
+	a. Add comments wherever possible.
+	b. If you download any script or use someone else's, please understand every line of the code since you will have to explain it to us in the next tech round.
+11. Extras:
+	a. All the assets can be found in the Unity package.
+	b. There are no restrictions on changing the FBX of the snake, as long as the snake has proper animations [if any]. No restriction on making the game look better, or on adding new features. But the above mentioned features need to be present. I can make this in 3D or 2D and download relevant assets from anywhere.
+	c. Polishing the game and making it look good will get you bonus points, since we’re looking for Unity Developers who can take full ownership of a product. It’s up to you to make it beautiful and polished, since that’s what we’ll expect from you!
+	d. Please use Unity 2019.4 or lower for the test => Using Unity 2019.4.28f1 (LTS - Long Term Support).
+	e. Maintain the code base over GitHub, currently use develop branch. Publish with proper commit messages & over time as soon as a new feature/functionality is developed.
