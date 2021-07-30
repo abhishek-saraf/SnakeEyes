@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace com.abhishek.saraf.SnakeEyes
@@ -12,7 +13,7 @@ namespace com.abhishek.saraf.SnakeEyes
         #region Private Attributes
 
         // X-axis = height, Z-axis = width.
-        [SerializeField] private int gridHeight = 1, gridWidth = 1; // Modifiable via Unity Inspector.
+        public int gridHeight = 5, gridWidth = 10; // Modifiable via Unity Inspector.
 
         #endregion
 
@@ -34,6 +35,8 @@ namespace com.abhishek.saraf.SnakeEyes
         void Start()
         {
             InitalizeGrid();
+
+            Debug.Log("Edge length: " + transform.localScale);
         }
 
         // Update is called once per frame

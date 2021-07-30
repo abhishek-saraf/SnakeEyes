@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace com.abhishek.saraf.SnakeEyes
@@ -11,7 +12,7 @@ namespace com.abhishek.saraf.SnakeEyes
     {
         #region Private Attributes
 
-        [SerializeField] private float _speed = 0.01f;
+        [SerializeField] private float _speed = 0.1f;
 
         [SerializeField] private float _turnSpeed = 10.0f;
 
@@ -58,8 +59,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
         private void MoveSnake()
         {
-            _parentSnakeGameObject.transform.position += _speed * Time.deltaTime * _parentSnakeGameObject.transform.forward;
-            // transform.position += _speed * Time.deltaTime * transform.forward;
+            transform.position += _speed * Time.deltaTime * transform.forward;
         }
 
         private void TurnSnake()
@@ -67,8 +67,7 @@ namespace com.abhishek.saraf.SnakeEyes
             if (Input.GetAxis("Horizontal") != 0)
             {
                 float _turnAmount = Input.GetAxis("Horizontal");
-                _parentSnakeGameObject.transform.Rotate(0.0f, _turnAmount * _turnSpeed, 0.0f);
-                // gameObject.transform.Rotate(0.0f, _turnAmount * _turnSpeed, 0.0f);
+                gameObject.transform.Rotate(0.0f, _turnAmount * _turnSpeed, 0.0f);
             }
         }
 
@@ -87,9 +86,20 @@ namespace com.abhishek.saraf.SnakeEyes
             // _parentSnakeGameObject.transform.position = Vector3.Reflect(_parentSnakeGameObject.transform.position, collision.GetContact(0).normal);
             // Debug.Log("New position: " + _parentSnakeGameObject.transform.position);
 
+            /*
             Vector3 magnitude = Vector3.Reflect(_parentSnakeGameObject.transform.rotation.eulerAngles, collision.GetContact(0).normal);
             Debug.Log("Magnitude: " + Vector3.Reflect(_parentSnakeGameObject.transform.rotation.eulerAngles, collision.GetContact(0).normal));
             _parentSnakeGameObject.transform.Rotate(magnitude);
+            */
+
+            // new
+            //Store new direction
+            Vector3 newDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
+            //Rotate bullet to new direction
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+            //add velocity to bullet based on new forward vector
+            // bulletRigidBody.velocity = transform.forward * bulletSpeed;
         }
 
         private void OnTriggerEnter(Collider other)

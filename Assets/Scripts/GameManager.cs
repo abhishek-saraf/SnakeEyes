@@ -12,13 +12,17 @@ namespace com.abhishek.saraf.SnakeEyes
     {
         #region Private Attributes
 
+        [SerializeField] private Camera _camera;
 
+        [SerializeField] private GameObject _grid;
 
         #endregion
 
         #region Public Attributes
 
         public static GameManager instance;
+
+        public int cameraHeight, cameraWidth;
 
         #endregion
 
@@ -28,6 +32,11 @@ namespace com.abhishek.saraf.SnakeEyes
         private void Awake()
         {
             instance = this;
+            cameraHeight = _grid.GetComponent<GridController>().gridHeight;
+            cameraWidth = _grid.GetComponent<GridController>().gridWidth;
+
+            int cameraSize = cameraHeight >= cameraWidth ? cameraHeight : cameraWidth;
+            _camera.orthographicSize = 0.125f * cameraSize;
         }
 
         // Start is called before the first frame update
