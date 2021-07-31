@@ -114,7 +114,6 @@ namespace com.abhishek.saraf.SnakeEyes
             }
             else
             {
-                Debug.Log(randomTile.transform.position);
                 return null;
             }
         }

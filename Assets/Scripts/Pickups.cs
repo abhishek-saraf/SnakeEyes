@@ -50,14 +50,9 @@ namespace com.abhishek.saraf.SnakeEyes
             GameObject tile = TileSpawner.instance.GetPizzaSpawnLocation();
             if (tile != null)
             {
-                Debug.Log("Spawning a pizza slice!");
                 Vector3 posToSpawn = tile.transform.position;
                 GameObject pizza = Instantiate(Resources.Load<GameObject>(Path.Combine("Prefabs", "PizzaSlice")), posToSpawn, Quaternion.identity, transform);
                 Destroy(pizza, _pizzaStayTime);
-            }
-            else
-            {
-                Debug.Log("Tile is null!");
             }
         }
 
@@ -65,7 +60,7 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             if (other.tag.Equals("Snake"))
             {
-                GameManager.instance.AddScore();
+                ScoreManager.instance.AddScore();
                 Destroy(gameObject);
             }
         }

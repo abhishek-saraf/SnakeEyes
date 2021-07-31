@@ -64,57 +64,40 @@ namespace com.abhishek.saraf.SnakeEyes
 
         private void TurnSnake()
         {
+            /*
             if (Input.GetAxis("Horizontal") != 0)
             {
-                float _turnAmount = Input.GetAxis("Horizontal");
-                gameObject.transform.Rotate(0.0f, _turnAmount * _turnSpeed, 0.0f);
+                float turnAmount = Input.GetAxis("Horizontal");
+
+                gameObject.transform.Rotate(0.0f, turnAmount * _turnSpeed, 0.0f);
+            }
+            */
+
+            SliderController sliderController = GameManager.instance.Slider.GetComponent<SliderController>();
+
+            bool isSliderHeld = sliderController.SliderHeld;
+
+            float sliderOutput = sliderController.output;
+
+            if (isSliderHeld)
+            {
+                gameObject.transform.Rotate(0.0f, sliderOutput * _turnSpeed, 0.0f);
             }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Snake Collided with something");
-            /*
-            var speed = _lastVelocity.magnitude;
-            Debug.Log("Speed: " + speed);
-            var direction = Vector3.Reflect(_lastVelocity.normalized, collision.GetContact(0).normal);
-            Debug.Log("Direction: " + direction);
-            _snakeRigidBody.velocity = direction * Mathf.Max(speed, 0f);
-            Debug.Log("New velocity: " + _snakeRigidBody.velocity);
-            */
-            // Debug.Log("Old position: " + _parentSnakeGameObject.transform.position);
-            // _parentSnakeGameObject.transform.position = Vector3.Reflect(_parentSnakeGameObject.transform.position, collision.GetContact(0).normal);
-            // Debug.Log("New position: " + _parentSnakeGameObject.transform.position);
-
-            /*
-            Vector3 magnitude = Vector3.Reflect(_parentSnakeGameObject.transform.rotation.eulerAngles, collision.GetContact(0).normal);
-            Debug.Log("Magnitude: " + Vector3.Reflect(_parentSnakeGameObject.transform.rotation.eulerAngles, collision.GetContact(0).normal));
-            _parentSnakeGameObject.transform.Rotate(magnitude);
-            */
-
-            // new
             //Store new direction
             Vector3 newDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
-            //Rotate bullet to new direction
+            //Rotate to new direction
             transform.rotation = Quaternion.LookRotation(newDirection);
-
-            //add velocity to bullet based on new forward vector
-            // bulletRigidBody.velocity = transform.forward * bulletSpeed;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Snake Triggered with something");
         }
 
         #endregion
 
         #region Public Methods
 
-        public void Reflect()
-        {
-            Debug.Log("Reflect Me!");
-        }
+
 
         #endregion
 

@@ -35,8 +35,6 @@ namespace com.abhishek.saraf.SnakeEyes
         void Start()
         {
             InitalizeGrid();
-
-            Debug.Log("Edge length: " + transform.localScale);
         }
 
         // Update is called once per frame
@@ -51,21 +49,6 @@ namespace com.abhishek.saraf.SnakeEyes
         private void InitalizeGrid()
         {
             gameObject.transform.localScale = new Vector3(gridHeight, 1, gridWidth);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log("Collided with " + collision.gameObject.tag);
-
-            if (collision.gameObject.tag.Equals("Snake"))
-            {
-                collision.gameObject.GetComponent<SnakeController>().Reflect();
-            }
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Triggered with " + other.tag);
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private GameObject _grid;
 
-        [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private GameObject _slider;
 
         #endregion
 
@@ -26,9 +26,16 @@ namespace com.abhishek.saraf.SnakeEyes
 
         public static GameManager instance;
 
-        public int cameraHeight, cameraWidth;
+        [HideInInspector] public int cameraHeight, cameraWidth;
 
-        public int score = 0;
+        #endregion
+
+        #region Properties
+
+        public GameObject Slider
+        {
+            get { return _slider; }
+        }
 
         #endregion
 
@@ -54,17 +61,14 @@ namespace com.abhishek.saraf.SnakeEyes
         // Update is called once per frame
         void Update()
         {
-            _scoreText.text = "Score: " + score;
+            
         }
 
         #endregion
 
         #region Public Methods
 
-        public void AddScore()
-        {
-            score += 1;
-        }
+
 
         public void GameOver()
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using TMPro;
+
 namespace com.abhishek.saraf.SnakeEyes
 {
     /**
@@ -12,13 +14,15 @@ namespace com.abhishek.saraf.SnakeEyes
     {
         #region Private Attributes
 
-
+        [SerializeField] private TextMeshProUGUI _scoreText;
 
         #endregion
 
         #region Public Attributes
 
+        public static ScoreManager instance;
 
+        [HideInInspector] public int score = 0;
 
         #endregion
 
@@ -27,7 +31,7 @@ namespace com.abhishek.saraf.SnakeEyes
         // Awake is called when the script instance is being loaded.
         private void Awake()
         {
-
+            instance = this;
         }
 
         // Start is called before the first frame update
@@ -39,14 +43,17 @@ namespace com.abhishek.saraf.SnakeEyes
         // Update is called once per frame
         void Update()
         {
-
+            _scoreText.text = "Score: " + score;
         }
 
         #endregion
 
         #region Public Methods
 
-
+        public void AddScore()
+        {
+            score += 1;
+        }
 
         #endregion
 
