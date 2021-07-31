@@ -16,6 +16,8 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private TextMeshProUGUI _scoreText;
 
+        [SerializeField] private AudioClip _pizzaEatingClip;
+
         #endregion
 
         #region Public Attributes
@@ -52,6 +54,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
         public void AddScore()
         {
+            AudioController.instance.GetComponent<AudioSource>().PlayOneShot(_pizzaEatingClip);
             score += 1;
         }
 

@@ -224,6 +224,8 @@ MonoBehaviour:
   _audioOff: {fileID: 1424750417}
   _playerName: {fileID: 1593305402}
   _playerNameInputField: {fileID: 175698525}
+  _mainMenuAudioClip: {fileID: 8300000, guid: a4be9486b0f84a6408e5b70f37b6311c, type: 3}
+  _inGameAudioClip: {fileID: 8300000, guid: 32bb896cd02dcab40b7dab0c0991e695, type: 3}
 --- !u!1 &89899413
 GameObject:
   m_ObjectHideFlags: 0
