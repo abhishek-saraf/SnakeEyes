@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace com.abhishek.saraf.SnakeEyes
 {
@@ -22,32 +19,13 @@ namespace com.abhishek.saraf.SnakeEyes
 
         #endregion
 
-        #region Public Attributes
-
-
-
-        #endregion
-
         #region Private Methods
-
-        // Awake is called when the script instance is being loaded.
-        private void Awake()
-        {
-
-        }
 
         // Start is called before the first frame update
         void Start()
         {
             _snakeRigidBody = GetComponent<Rigidbody>();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
 
         private void FixedUpdate()
         {
@@ -62,6 +40,8 @@ namespace com.abhishek.saraf.SnakeEyes
 
         private void TurnSnake()
         {
+            #region MyComment
+            // Please uncomment the below code snip in case we want to move snake using keyboard keys instead of the UI slider.
             /*
             if (Input.GetAxis("Horizontal") != 0)
             {
@@ -70,6 +50,7 @@ namespace com.abhishek.saraf.SnakeEyes
                 gameObject.transform.Rotate(0.0f, turnAmount * _turnSpeed, 0.0f);
             }
             */
+            #endregion
 
             SliderController sliderController = GameManager.instance.Slider.GetComponent<SliderController>();
 
@@ -90,18 +71,6 @@ namespace com.abhishek.saraf.SnakeEyes
             //Rotate to new direction
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
-
-        #endregion
-
-        #region Public Methods
-
-
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

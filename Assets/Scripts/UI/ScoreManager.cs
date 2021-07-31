@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 using TMPro;
 
@@ -36,12 +33,6 @@ namespace com.abhishek.saraf.SnakeEyes
             instance = this;
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -57,12 +48,6 @@ namespace com.abhishek.saraf.SnakeEyes
             AudioController.instance.GetComponent<AudioSource>().PlayOneShot(_pizzaEatingClip);
             score += 1;
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

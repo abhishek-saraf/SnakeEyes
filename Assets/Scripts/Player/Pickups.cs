@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 
 using UnityEngine;
 
@@ -33,18 +31,6 @@ namespace com.abhishek.saraf.SnakeEyes
             instance = this;
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         private void SpawnPizza()
         {
             GameObject tile = TileSpawner.instance.GetPizzaSpawnLocation();
@@ -73,12 +59,6 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             InvokeRepeating(nameof(SpawnPizza), 2.0f, _pizzaSpawnTime);
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

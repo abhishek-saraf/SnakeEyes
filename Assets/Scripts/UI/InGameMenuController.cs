@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using TMPro;
-
 
 namespace com.abhishek.saraf.SnakeEyes
 {
@@ -29,23 +24,11 @@ namespace com.abhishek.saraf.SnakeEyes
 
         #region Private Methods
 
-        // Awake is called when the script instance is being loaded.
-        private void Awake()
-        {
-
-        }
-
         // Start is called before the first frame update
         void Start()
         {
             _pauseMenu.SetActive(false);
             _inGameMenu.SetActive(true);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
 
         private void Pause()
@@ -136,12 +119,6 @@ namespace com.abhishek.saraf.SnakeEyes
             CheckAndSaveHighScore();
             _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

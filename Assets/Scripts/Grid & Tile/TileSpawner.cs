@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 using UnityEngine;
@@ -49,12 +48,6 @@ namespace com.abhishek.saraf.SnakeEyes
             Pickups.instance.SpawnPizzas();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         private void InstantiateTiles()
         {
             GameObject referenceTile = Instantiate(Resources.Load<GameObject>(Path.Combine("Prefabs", "Tile")));
@@ -82,11 +75,7 @@ namespace com.abhishek.saraf.SnakeEyes
             transform.position = new Vector3(-gridHeight / 2 + _tileSize / 2, 0.0f, gridWidth / 2 - _tileSize / 2);
         }
 
-        #endregion
-
-        #region Public Methods
-
-        public GameObject GetPizzaSpawnLocation()
+        private List<GameObject> GetFreeTiles()
         {
             List<GameObject> freeTiles = new List<GameObject>();
 
@@ -98,9 +87,20 @@ namespace com.abhishek.saraf.SnakeEyes
                 }
             }
 
+            return freeTiles;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public GameObject GetPizzaSpawnLocation()
+        {
+            List<GameObject> freeTiles = GetFreeTiles();
+
             if (freeTiles.Count == 0)
             {
-                GameManager.instance.GameOver();
+                return null;
             }
 
             int randomTileIndex = Random.Range(0, freeTiles.Count);
@@ -108,11 +108,19 @@ namespace com.abhishek.saraf.SnakeEyes
             return freeTiles[randomTileIndex];
         }
 
-        #endregion
+        public bool CheckForGameOver()
+        {
+            List<GameObject> freeTiles = GetFreeTiles();
 
-        #region Public Overriden Methods
-
-
+            if (freeTiles.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
     }

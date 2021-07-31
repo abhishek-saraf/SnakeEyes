@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace com.abhishek.saraf.SnakeEyes
 {
@@ -60,24 +57,6 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             _gameAudioSource.volume = PlayerPrefs.GetFloat("GameAudioVolume", 1.0f);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        #endregion
-
-        #region Public Methods
-
-
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

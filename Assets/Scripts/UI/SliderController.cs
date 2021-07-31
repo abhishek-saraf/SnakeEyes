@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace com.abhishek.saraf.SnakeEyes
 {
+    /**
+     * This script will be responsible for controlling the UI slider in the In-Game menu - for controlling the snake movement.
+     */
     public class SliderController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
     {
         #region Private Attributes
@@ -43,18 +42,6 @@ namespace com.abhishek.saraf.SnakeEyes
         #endregion
 
         #region Private Methods
-
-        // Awake is called when the script instance is being loaded.
-        private void Awake()
-        {
-
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()
@@ -113,12 +100,6 @@ namespace com.abhishek.saraf.SnakeEyes
             OnDrag(eventData);
             _sliderHeld = false;
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

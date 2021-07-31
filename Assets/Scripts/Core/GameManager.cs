@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
-
-using TMPro;
+﻿using UnityEngine;
 
 namespace com.abhishek.saraf.SnakeEyes
 {
@@ -56,23 +51,9 @@ namespace com.abhishek.saraf.SnakeEyes
             _camera.orthographicSize = 0.125f * cameraSize;
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
         #endregion
 
         #region Public Methods
-
-
 
         public void GameOver()
         {
@@ -82,12 +63,6 @@ namespace com.abhishek.saraf.SnakeEyes
 
             Time.timeScale = 0;
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }

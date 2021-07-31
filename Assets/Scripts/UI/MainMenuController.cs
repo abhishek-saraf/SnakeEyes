@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using TMPro;
-
 
 namespace com.abhishek.saraf.SnakeEyes
 {
@@ -37,12 +33,6 @@ namespace com.abhishek.saraf.SnakeEyes
 
         #endregion
 
-        #region Public Attributes
-
-
-
-        #endregion
-
         #region Properties
 
         public float Volume
@@ -59,12 +49,6 @@ namespace com.abhishek.saraf.SnakeEyes
 
         #region Private Methods
 
-        // Awake is called when the script instance is being loaded.
-        private void Awake()
-        {
-
-        }
-
         // Start is called before the first frame update
         void Start()
         {
@@ -75,12 +59,6 @@ namespace com.abhishek.saraf.SnakeEyes
 
             AudioController.instance.GetComponent<AudioSource>().clip = _mainMenuAudioClip;
             AudioController.instance.GetComponent<AudioSource>().Play();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
 
         private void ChangeAudioVolume(float value)
@@ -152,12 +130,6 @@ namespace com.abhishek.saraf.SnakeEyes
             PlayerPrefs.SetString("PlayerName", value);
             _playerName.text = value;
         }
-
-        #endregion
-
-        #region Public Overriden Methods
-
-
 
         #endregion
     }
