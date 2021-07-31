@@ -88,34 +88,24 @@ namespace com.abhishek.saraf.SnakeEyes
 
         public GameObject GetPizzaSpawnLocation()
         {
-            bool allGreenFlag = true;
+            List<GameObject> freeTiles = new List<GameObject>();
 
             foreach (GameObject tile in tiles)
             {
                 if (tile.GetComponent<MeshRenderer>().material.color.Equals(_initialMat.color))
                 {
-                    allGreenFlag = false;
-                    break;
+                    freeTiles.Add(tile);
                 }
             }
 
-            if (allGreenFlag)
+            if (freeTiles.Count == 0)
             {
                 GameManager.instance.GameOver();
             }
 
-            int randomTileIndex = Random.Range(0, tiles.Count);
+            int randomTileIndex = Random.Range(0, freeTiles.Count);
 
-            GameObject randomTile = tiles[randomTileIndex];
-
-            if (randomTile.GetComponent<MeshRenderer>().material.color.Equals(_initialMat.color))
-            {
-                return tiles[randomTileIndex];
-            }
-            else
-            {
-                return null;
-            }
+            return freeTiles[randomTileIndex];
         }
 
         #endregion

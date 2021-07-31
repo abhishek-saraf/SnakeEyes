@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6502c0e485a55a44485189d79f4eea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.05
+  _speed: 0.25
   _turnSpeed: 10
   _parentSnakeGameObject: {fileID: 6593869382535654634}
 --- !u!135 &6593869382535654629
