@@ -25,7 +25,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private GameObject _audioOn, _audioOff;
 
-        [SerializeField] private TextMeshProUGUI _playerName;
+        [SerializeField] private TextMeshProUGUI _playerName, _highScoreText;
 
         [SerializeField] private TMP_InputField _playerNameInputField;
 
@@ -70,6 +70,8 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             _playerName.text = PlayerPrefs.GetString("PlayerName", "Player");
             _volumeSlider.value = PlayerPrefs.GetFloat("GameAudioVolume", 1.0f);
+
+            _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
 
             AudioController.instance.GetComponent<AudioSource>().clip = _mainMenuAudioClip;
             AudioController.instance.GetComponent<AudioSource>().Play();

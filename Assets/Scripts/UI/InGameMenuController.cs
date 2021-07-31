@@ -19,7 +19,11 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private int _mainMenuSceneIndex = 0;
 
-        [SerializeField] private GameObject _inGameMenu, _pauseMenu;
+        [SerializeField] private GameObject _inGameMenu, _pauseMenu, _gameOverMenu;
+
+        [SerializeField] private TextMeshProUGUI _scoreText, _highScoreText;
+
+        [SerializeField] private AudioClip _deathClip;
 
         #endregion
 
@@ -34,13 +38,53 @@ namespace com.abhishek.saraf.SnakeEyes
         // Start is called before the first frame update
         void Start()
         {
-
+            _pauseMenu.SetActive(false);
+            _inGameMenu.SetActive(true);
         }
 
         // Update is called once per frame
         void Update()
         {
             
+        }
+
+        private void Pause()
+        {
+            PauseAudio();
+            Time.timeScale = 0;
+        }
+
+        private void Resume()
+        {
+            Time.timeScale = 1;
+        }
+
+        private void PauseAudio()
+        {
+            AudioController.instance.GameAudioSource.Pause();
+        }
+
+        private void ResumeAudio()
+        {
+            AudioController.instance.GameAudioSource.Play();
+        }
+
+        private void Reset()
+        {
+            GameManager.instance.isGameOver = false;
+            _gameOverMenu.SetActive(false);
+            _inGameMenu.SetActive(true);
+        }
+
+        private void CheckAndSaveHighScore()
+        {
+            int currentScore = ScoreManager.instance.score;
+            int highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+            if (currentScore > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", currentScore);
+            }
         }
 
         #endregion
@@ -51,37 +95,46 @@ namespace com.abhishek.saraf.SnakeEyes
         {
             _inGameMenu.SetActive(false);
             _pauseMenu.SetActive(true);
+            Pause();
         }
 
         public void LoadInGameMenu()
         {
+            ResumeAudio();
+            Resume();
             _pauseMenu.SetActive(false);
             _inGameMenu.SetActive(true);
         }
 
         public void LoadMainMenu()
         {
+            Resume();
+            Reset();
             SceneManager.LoadScene(_mainMenuSceneIndex);
-        }
-
-        public void Pause()
-        {
-            Time.timeScale = 0;
-        }
-
-        public void Resume()
-        {
-            Time.timeScale = 1;
         }
 
         public void Restart()
         {
+            ResumeAudio();
+            Resume();
+            Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void ShowGameOverMenu()
+        {
+            AudioController.instance.GetComponent<AudioSource>().Stop();
+            AudioController.instance.GetComponent<AudioSource>().PlayOneShot(_deathClip);
+            _inGameMenu.SetActive(false);
+            _gameOverMenu.SetActive(true);
+            _scoreText.text = "Score: " + ScoreManager.instance.score.ToString();
+            CheckAndSaveHighScore();
+            _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
         }
 
         #endregion

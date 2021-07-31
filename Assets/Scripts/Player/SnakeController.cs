@@ -20,8 +20,6 @@ namespace com.abhishek.saraf.SnakeEyes
 
         private Rigidbody _snakeRigidBody;
 
-        private Vector3 _lastVelocity;
-
         #endregion
 
         #region Public Attributes
@@ -47,7 +45,7 @@ namespace com.abhishek.saraf.SnakeEyes
         // Update is called once per frame
         void Update()
         {
-            _lastVelocity = _snakeRigidBody.velocity;
+
         }
 
 

@@ -20,6 +20,8 @@ namespace com.abhishek.saraf.SnakeEyes
 
         [SerializeField] private GameObject _slider;
 
+        [SerializeField] private GameObject _uiController;
+
         #endregion
 
         #region Public Attributes
@@ -27,6 +29,8 @@ namespace com.abhishek.saraf.SnakeEyes
         public static GameManager instance;
 
         [HideInInspector] public int cameraHeight, cameraWidth;
+
+        [HideInInspector] public bool isGameOver;
 
         #endregion
 
@@ -72,6 +76,10 @@ namespace com.abhishek.saraf.SnakeEyes
 
         public void GameOver()
         {
+            isGameOver = true;
+
+            _uiController.GetComponent<InGameMenuController>().ShowGameOverMenu();
+
             Time.timeScale = 0;
         }
 
