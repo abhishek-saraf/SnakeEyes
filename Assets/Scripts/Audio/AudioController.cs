@@ -9,13 +9,13 @@ namespace com.abhishek.saraf.SnakeEyes
     {
         #region Private Attributes
 
-        [SerializeField] private AudioSource _gameAudioSource;
+        [SerializeField] private AudioSource _gameAudioSource; // reference for the game audio source component.
 
         #endregion
 
         #region Public Attributes
 
-        public static AudioController instance;
+        public static AudioController instance; // declaring the singleton instance.
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
         public AudioSource GameAudioSource
         {
-            get { return _gameAudioSource; }
+            get { return _gameAudioSource; } // provide reference of game audio source - make it available for other scripts to use it.
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace com.abhishek.saraf.SnakeEyes
         // Start is called before the first frame update
         void Start()
         {
-            _gameAudioSource.volume = PlayerPrefs.GetFloat("GameAudioVolume", 1.0f);
+            _gameAudioSource.volume = PlayerPrefs.GetFloat("GameAudioVolume", 1.0f); // update the game's audio source based on value stored in PlayerPrefs.
         }
 
         #endregion

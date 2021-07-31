@@ -19,7 +19,7 @@ namespace com.abhishek.saraf.SnakeEyes
         // Start is called before the first frame update
         void Start()
         {
-            InitalizeGrid();
+            InitalizeGrid(); // initialize the game's grid.
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace com.abhishek.saraf.SnakeEyes
         /// </summary>
         private void InitalizeGrid()
         {
-            gameObject.transform.localScale = new Vector3(gridHeight, 1, gridWidth);
+            gameObject.transform.localScale = new Vector3(gridHeight, 1, gridWidth); // update the grid scale based on the values provided in the inspector.
         }
 
         #endregion

@@ -1887,8 +1887,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.30437878, g: 0.65757674, b: 0.6792453, a: 0.58431375}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2135,8 +2135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 596.36017, y: -252.28247}
-  m_SizeDelta: {x: 1192.7203, y: 168.18831}
+  m_AnchoredPosition: {x: 596.36017, y: -244.39412}
+  m_SizeDelta: {x: 1192.7203, y: 162.92941}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065539650
 MonoBehaviour:
@@ -3759,8 +3759,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 596.36017, y: -84.094154}
-  m_SizeDelta: {x: 1192.7203, y: 168.18831}
+  m_AnchoredPosition: {x: 596.36017, y: -81.46471}
+  m_SizeDelta: {x: 1192.7203, y: 162.92941}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1686896959
 MonoBehaviour:
@@ -4189,10 +4189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c5621e3e1c0874d8a3925ca95580be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sliderHeld: 0
   _slider: {fileID: 456036060}
   _maxSliderSteerAngle: 360
   _releaseSpeed: 700
+  _clampSlider: 1
+  _sliderHeld: 0
   output: 0
 --- !u!1 &1908921450
 GameObject:
@@ -4476,7 +4477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.25
   _turnSpeed: 10
-  _parentSnakeGameObject: {fileID: 5691786669874065296}
 --- !u!54 &5691786669874065310
 Rigidbody:
   m_ObjectHideFlags: 0
