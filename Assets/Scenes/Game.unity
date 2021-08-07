@@ -593,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20300001, y: 0.33838367}
   m_AnchorMax: {x: 0.82435423, y: 0.7006842}
-  m_AnchoredPosition: {x: -1.8599854, y: 3.199997}
+  m_AnchoredPosition: {x: -1.8599854, y: 3.2000122}
   m_SizeDelta: {x: -0.27978516, y: 6.333679}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &302461807
@@ -4192,7 +4192,7 @@ MonoBehaviour:
   _slider: {fileID: 456036060}
   _maxSliderSteerAngle: 360
   _releaseSpeed: 700
-  _clampSlider: 1
+  _clampSlider: 0
   _sliderHeld: 0
   output: 0
 --- !u!1 &1908921450

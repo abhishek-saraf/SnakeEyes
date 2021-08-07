@@ -57,22 +57,39 @@ namespace com.abhishek.saraf.SnakeEyes
                 // we need to bring the slider back to its original position - in both cases - if its rotated either left/right by the user.
                 if (Mathf.Abs(deltaAngle) > Mathf.Abs(_sliderAngle))
                 {
+                    // Kind of fallback - if we do not use this condition, if slider is turned left or right, while coming back to the original pos, it will
+                    // look like shifting its pos from left to right & won't remain at exact 0.0 pos (kinda vibratory motion simulation).
+                    // Also, in case if we do not use Math.Abs, it will not bring back the slider smoothly to its original pos,
+                    // when turned to the left, instead it will look like teleported.
                     _sliderAngle = 0.0f; // if the delta angle is greater than the slider's angle - bring the value to 0.
                 }
                 else if (_sliderAngle > 0.0f)
                 {
+                    // slider won't go back to original pos if turned right if below statement is absent.
                     _sliderAngle -= deltaAngle; // decrement the slider angle with the delta angle if the slider angle is greater than 0.
                 }
                 else
                 {
+                    // slider won't go back to original pos if turned left if below statement is absent.
                     _sliderAngle += deltaAngle; // increment the slider angle with the delta angle if the slider angle is less than 0.
                 }
             }
             
+            // The below statement is required to move the actual slider sprite(s) in the UI.
+            // Otherwise, the snake will turn but the slider will not, even with user inputs - drag/drop; making the turns look non-realistic.
             _slider.localEulerAngles = new Vector3(0.0f, 0.0f, -_sliderAngle); // rotate the slider/joystick in the 'Z-axis' based on the slider angle.
-            
+
             // calculate the output to know to which degree we need to rotate the snake, based on the slider angle & max slider steer angle.
-            output = _sliderAngle / _maxSliderSteerAngle;
+            // We won't be able to rotate the snake if the output is not calculated appropriately; i.e. slider will turn in the UI but the snake won't.
+            if (!_maxSliderSteerAngle.Equals(0.0f)) // can try 'float.Epsilon' [Epsilon can be used to account for all kinds of inaccuracies with regards to floats, e.g. comparing floats.]
+            {
+                // if we simply keep { output = _sliderAngle } snake will turn indefinitely, and it looks kinda awkward,
+                // so we will divide the slider angle with the max slider steer angle.
+                // '_maxSliderSteerAngle' serves two purpose = first we can clamp using this value.
+                // second - we can use this value - like a turn sensitivity; if value is too less, snake will turn swiftly, and,
+                // if the value is too high, it will turn very slowly, i.e. we might need to turn the slider a lot just for a small turn for snake.
+                output = _sliderAngle / _maxSliderSteerAngle;
+            }
         }
 
         #endregion
@@ -86,18 +103,19 @@ namespace com.abhishek.saraf.SnakeEyes
         public void OnDrag(PointerEventData eventData)
         {
             // calculate and store the new angle similar to calculation of last slider angle based on the event data's position & slider's center position.
-            float newAngle = Vector2.Angle(Vector2.up, eventData.position - _center);
+            float newAngle = Vector2.Angle(Vector2.up, eventData.position - _center); // helps rotate our slider/wheel - if 0, our slider won't rotate properly.
             // calculate and store the slider angle based on the new angle calculated above and the last slider angle.
             // Proceed only if the square magnitude of the difference b/w the event data's position & center >= 400.
-            if ((eventData.position - _center).sqrMagnitude >= 400)
+
+            if ((eventData.position - _center).sqrMagnitude >= 400) // found value = 400 to be very effective for smooth & appropriate turns.
             {
                 if (eventData.position.x > _center.x)
                 {
-                    _sliderAngle += newAngle - _lastSliderAngle;
+                    _sliderAngle += newAngle - _lastSliderAngle; // helps in right turns.
                 }
                 else
                 {
-                    _sliderAngle -= newAngle - _lastSliderAngle;
+                    _sliderAngle -= newAngle - _lastSliderAngle; // helps in left turns.
                 }
             }
             // Clamp the slider based on the boolean "clampSlider", i.e. clamp the slider only if required.
@@ -107,6 +125,8 @@ namespace com.abhishek.saraf.SnakeEyes
                 _sliderAngle = Mathf.Clamp(_sliderAngle, -_maxSliderSteerAngle, _maxSliderSteerAngle);
             }
             
+            // Helps in smooth & appropriate rotation / turns of the slider, if we don't perform the below, turns will happen very swiftly,
+            // i.e. it won't follow the mouse position of drag/drop events effectively.
             _lastSliderAngle = newAngle; // update the last slider angle to the new angle calculated above.
         }
 
@@ -117,8 +137,10 @@ namespace com.abhishek.saraf.SnakeEyes
         public void OnPointerDown(PointerEventData eventData)
         {
             _sliderHeld = true; // update 'sliderHeld' to 'true' if the slider is held down.
+            // Center is kinda constant all - throughout.
             _center = RectTransformUtility.WorldToScreenPoint(eventData.pressEventCamera, _slider.position); // update the center of the slider.
             // calculate and store the last slider angle based on the event data's position & slider's center position.
+            // If we skip the below statement, slider turns will look like teleportations instead of smooth turns.
             _lastSliderAngle = Vector2.Angle(Vector2.up, eventData.position - _center);
         }
 
@@ -128,6 +150,7 @@ namespace com.abhishek.saraf.SnakeEyes
         /// <param name="eventData">Current event data.</param>
         public void OnPointerUp(PointerEventData eventData)
         {
+            // Even if auto-called on mouse drag when pressed down - we can call it manually, kinds of smooths down the transitions.
             OnDrag(eventData); // call the 'OnDrag' event manually.
             _sliderHeld = false; // update 'sliderHeld' to 'false' if the slider is not held down/pointer is lifted up.
         }

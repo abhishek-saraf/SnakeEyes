@@ -77,7 +77,7 @@ namespace com.abhishek.saraf.SnakeEyes
 
             float gridWidth = cols * _tileSize; // calculate and store the value for the new gridWidth.
             float gridHeight = rows * _tileSize; // calculate and store the value for the new gridHeight.
-            
+
             // update the grid's position based on above calculated values.
             transform.position = new Vector3(-gridHeight / 2 + _tileSize / 2, 0.0f, gridWidth / 2 - _tileSize / 2);
         }
